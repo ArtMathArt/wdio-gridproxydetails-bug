@@ -1,0 +1,19 @@
+{
+  "name": "wdio-gridproxydetails-bug",
+  "version": "1.0.0",
+  "description": "Minimal reproducible example for a WebdriverIO bug related to browser.gridProxyDetails.",
+  "main": "index.js",
+  "scripts": {
+    "install-chrome-base": "npx @puppeteer/browsers install chrome@stable --path=./chrome-base && npx @puppeteer/browsers install chromedriver@stable --path=./chrome-base",
+    "test": "node index.js"
+  },
+  "keywords": [],
+  "author": "Artem Sukhinin <sukhart.work27@gmail.com>",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "@puppeteer/browsers": "^2.10.2",
+    "axios": "^1.9.0",
+    "webdriverio": "^9.12.7"
+  }
+}
