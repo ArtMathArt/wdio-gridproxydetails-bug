@@ -1,6 +1,7 @@
 import axios from "axios";
 import { spawn } from "node:child_process";
 import {getInstalledBrowsers} from "@puppeteer/browsers";
+import path from "node:path";
 
 export async function waitOn({
   url,
@@ -77,7 +78,7 @@ export async function startNode() {
   const node = spawn(
     "java",
     [
-      `-Dwebdriver.chrome.driver=${chromedriver.executablePath}`,
+      `-Dwebdriver.chrome.driver=${path.resolve(chromedriver.executablePath)}`,
       "-jar",
       "selenium-server-standalone-3.141.59-node.jar",
       "-role",
@@ -85,7 +86,7 @@ export async function startNode() {
       "-hub",
       "http://localhost:4444/grid/register",
       `-browser`,
-      `browserName=chrome,chromeOptions.binary=${chrome.executablePath}`,
+      `browserName=chrome,chromeOptions.binary=${path.resolve(chrome.executablePath)}`,
     ],
     { stdio: "inherit" }
   );
@@ -103,5 +104,5 @@ export async function startNode() {
     },
   });
   console.log("Selenium Node ready.");
-  return node;
+  return [node, path.resolve(chrome.executablePath)];
 }

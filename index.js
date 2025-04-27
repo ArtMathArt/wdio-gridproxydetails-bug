@@ -3,7 +3,7 @@ import { strict as assert } from "node:assert";
 import { startHub, startNode } from "./utils.js";
 
 const hub = await startHub();
-const node = await startNode();
+const [node, chromeBinaryPath] = await startNode();
 
 try {
   const browser = await remote({
@@ -14,6 +14,7 @@ try {
       browserName: "chrome",
       "goog:chromeOptions": {
         args: ["headless", "disable-gpu"],
+        binary: chromeBinaryPath,
       },
       "wdio:enforceWebDriverClassic": true,
     },
