@@ -1,0 +1,41 @@
+name: build_webdriverio
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build and Archive WebdriverIO Fork
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Clone WebdriverIO Fork
+        run: |
+          git clone --depth=1 https://github.com/ArtMathArt/webdriverio.git webdriverio-fork
+
+      - name: Install dependencies and build
+        run: |
+          export SHELL=/bin/bash
+          cd webdriverio-fork
+          pnpm install
+          pnpm setup
+          pnpm build
+
+      - name: Create Build Archive
+        run: |
+          cd webdriverio-fork
+          zip -q -r webdriverio-build.zip packages/*/build packages/*/cjs
+
+      - name: Upload WebdriverIO Build Archive
+        uses: actions/upload-artifact@v4
+        with:
+          name: webdriverio-build
+          path: webdriverio-fork/webdriverio-build.zip
