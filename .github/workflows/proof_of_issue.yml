@@ -33,4 +33,4 @@ jobs:
         run: npm run install-chrome-base
 
       - name: Run tests
-        run: npm test
+        run: su pptruser -c "npm test"
