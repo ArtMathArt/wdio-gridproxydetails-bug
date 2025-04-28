@@ -68,6 +68,9 @@ jobs:
       
       - name: Install Project Dependencies
         run: npm install
+      
+      - name: Install Chrome and Chromedriver
+        run: npm run install-chrome-base
 
       - name: Download WebdriverIO Build
         uses: actions/download-artifact@v4
@@ -79,14 +82,11 @@ jobs:
         run: |
           cd webdriverio-fork
           unzip webdriverio-build.zip -d extracted
-          cd extracted/packages/webdriverio
-          npm link
-
-      - name: Link Built WebdriverIO into Repro Project
-        run: npm link webdriverio
-
-      - name: Install Chrome and Chromedriver
-        run: npm run install-chrome-base
+      
+      - name: Replace WebdriverIO Build Folder
+        run: |
+          rm -rf node_modules/webdriverio/build
+          cp -r webdriverio-fork/extracted/packages/webdriverio/build node_modules/webdriverio/
 
       - name: Run Tests
         run: su pptruser -c "npm test"
