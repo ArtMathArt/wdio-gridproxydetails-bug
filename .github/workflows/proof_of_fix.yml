@@ -85,8 +85,8 @@ jobs:
       
       - name: Replace WebdriverIO Build Folder
         run: |
-          rm -rf node_modules/webdriverio/build
-          cp -r webdriverio-fork/extracted/packages/webdriverio/build node_modules/webdriverio/
+          rm -rf node_modules/@wdio/protocols/build
+          cp -r webdriverio-fork/extracted/packages/wdio-protocols/build node_modules/@wdio/protocols
 
       - name: Run Tests
         run: su pptruser -c "npm test"
