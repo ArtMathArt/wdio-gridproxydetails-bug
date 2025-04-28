@@ -49,7 +49,7 @@ jobs:
     needs: build_webdriverio
     container:
       image: ghcr.io/puppeteer/puppeteer:latest
-      options: --cap-add=SYS_ADMIN --user root
+      options: --cap-add=SYS_ADMIN
 
     steps:
       - name: Checkout Reproduction Repository
