@@ -49,10 +49,10 @@ jobs:
     needs: build_webdriverio
     container:
       image: ghcr.io/puppeteer/puppeteer:latest
-      options: --cap-add=SYS_ADMIN
+      options: --cap-add=SYS_ADMIN --user root
 
     steps:
-      - name: Checkout Reproduction Repository
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
       - name: Set up Node.js
@@ -65,9 +65,6 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '11'
-
-      - name: Install pnpm
-        run: npm install -g pnpm
 
       - name: Download WebdriverIO Build
         uses: actions/download-artifact@v4
