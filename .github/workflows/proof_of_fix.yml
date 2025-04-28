@@ -12,7 +12,7 @@ jobs:
       options: --cap-add=SYS_ADMIN
 
     steps:
-      - name: Checkout Reproduction Repository
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Set up Node.js
